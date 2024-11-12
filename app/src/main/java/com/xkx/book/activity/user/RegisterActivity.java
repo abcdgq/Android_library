@@ -14,6 +14,8 @@ import com.xkx.book.database.UserDBHelper;
 import com.xkx.book.enity.User;
 import com.xkx.book.util.ToastUtil;
 
+import java.util.List;
+
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView register_back;
@@ -73,20 +75,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         User user = null;
 
         if (view.getId() == R.id.register_return) {
-            intent.setClass(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
+//            intent.setClass(RegisterActivity.this, LoginActivity.class);
+//            startActivity(intent);
+            finish();// 直接退出这个，返回上一个页面就行，不然，这个页面还留在堆栈，没必要
         } else if (view.getId() == R.id.btn_register) {
             if (!username.isEmpty() && !userid.isEmpty() && !password.isEmpty()) {
                 // 声明一个用户信息对象，并填写它的字段值
-                user = new User(userid,
-                        username,
-                        Long.parseLong(password),
-                        is_book,
-                        user_status,
-                        is_deleted);
+                List<User> users = mHelper.queryById(userid); //实际上，我准备让他最大为1，即uid不重复
+                if (users.isEmpty()){
+                    user = new User(userid,
+                            username,
+                            Long.parseLong(password),
+                            is_book,
+                            user_status,
+                            is_deleted);
 
-                if (mHelper.insert(user) > 0) {
-                    ToastUtil.show(this, "注册成功！");
+                    if (mHelper.insert(user) > 0) { // 很难插入不成功啊
+                        ToastUtil.show(this, "注册成功！");
+                        //Intent intent1 = new Intent(this, LoginActivity.class);
+                        //startActivity(intent1);//注册成功的话，直接返回登录界面
+//                    ToastUtil.show(this, "注册成功！");
+                        finish();//直接退出这个界面，因为这个界面是上个界面调用的，所以退出后，还是到上个界面
+                    } else {
+                        ToastUtil.show(this, "数据不合法或空间不足");
+                    }
+                } else {
+                    ToastUtil.show(this, "该账户已经存在");
                 }
             } else {
                 ToastUtil.show(this, "不允许留空");

@@ -37,7 +37,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                " userid INTEGER not null," +
+                " userid INTEGER not null," + // 直接把这个当学号,这个不能重复
                 " username varchar not null," +
                 " password LONG not null," +
                 " is_book INTEGER not null," +
@@ -160,7 +160,7 @@ public class UserDBHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    //按Uid 查询
+    //按Uid 查询,,这真是个烂方法，定义了一个自动生成的主键id，又有uid,这里查的是uid但是命名是id，而且，uid,账户，学号，被他设置成同一个东西的不同显示
     public List<User> queryById(String uid) {
         List<User> list = new ArrayList<>();
         //执行记录查询动作，该语句返回结果集的游标
@@ -199,6 +199,26 @@ public class UserDBHelper extends SQLiteOpenHelper {
         }
         return list;
     }
+
+//    //按Uid和psw 查询
+//    public User queryByUid(String uid) {
+//        //List<User> list = new ArrayList<>();
+//        //执行记录查询动作，该语句返回结果集的游标
+//        Cursor cursor = mRDB.query(TABLE_NAME, null, "userid=?", new String[]{uid}, null, null, null);
+//        //循环游标，取出游标所指的每条记录
+//        if(cursor.moveToNext()) { // 只会有一个人，uid不能重复,不然登录时候出问题
+//            User user = new User();
+//            user.id = cursor.getInt(0);
+//            user.userid = cursor.getString(1);
+//            user.username = cursor.getString(2);
+//            user.password = cursor.getLong(3);
+//            user.is_book = cursor.getInt(4);
+//            user.user_status = cursor.getInt(5);
+//            user.is_deleted = cursor.getInt(6);
+//            return user;
+//        }
+//        return null;
+//    }
 
 }
 
