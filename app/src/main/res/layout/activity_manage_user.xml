@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_user_manage_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="用户管理"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/btn_add_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_user_manage_welcome"
+        android:layout_marginTop="30dp"
+        android:text="添加用户"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_view_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_add_user"
+        android:layout_marginTop="30dp"
+        android:text="查看用户"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

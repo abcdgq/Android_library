@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xkx.book">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.图书借阅"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.borrow.BorrowBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.borrow.ViewBorrowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.book.UpdateBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.book.ViewBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.book.AddBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.book.ManageBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.UpdateUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.ViewUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.AddUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.ManageUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.book.FindBookActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.UserUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.user.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.user.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

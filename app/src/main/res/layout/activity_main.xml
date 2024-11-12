@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:scaleType="center"
+        android:src="@drawable/mtitle" />
+
+    <CheckBox
+        android:id="@+id/ck_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="1dp"
+        android:text="管理员模式" />
+
+    <TextView
+        android:id="@+id/user_ser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ck_admin"
+        android:layout_marginTop="20dp"
+        android:text="用户服务" />
+
+    <TextView
+        android:id="@+id/admin_ser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/L2"
+        android:layout_marginTop="30dp"
+        android:text="管理员服务" />
+    <!--    下划线-->
+    <ImageView
+        android:id="@+id/login_diver2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/admin_ser"
+        android:background="@color/input_text_hint" />
+
+    <!--    下划线-->
+    <ImageView
+        android:id="@+id/login_diver1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/user_ser"
+        android:background="@color/input_text_hint" />
+
+    <LinearLayout
+        android:id="@+id/L1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/admin_ser"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_admin_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="权限管理\n(用户信息)" />
+
+        <Button
+            android:id="@+id/btn_admin_bookmanage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="图书管理\n(管理图书)" />
+
+        <Button
+            android:id="@+id/btn_admin_borrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="系统管理\n(借阅记录)" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/L2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_ser"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="读者服务\n（修改信息）" />
+
+        <Button
+            android:id="@+id/btn_user_serch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="图书服务\n(查找图书)" />
+
+        <Button
+            android:id="@+id/btn_user_borrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="图书租借\n(借阅记录)" />
+
+    </LinearLayout>
+</RelativeLayout>
