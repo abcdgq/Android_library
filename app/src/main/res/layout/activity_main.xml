@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="图书服务\n(查找图书)" />
+            android:text="图书服务\n(查找\借阅图书)" />
 
         <Button
             android:id="@+id/btn_user_borrow"

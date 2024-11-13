@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.xkx.book.R;
 import com.xkx.book.adapter.BookAdapter;
@@ -21,6 +23,7 @@ import com.xkx.book.enity.Book;
 import com.xkx.book.enity.Borrow;
 import com.xkx.book.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FindBookActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -39,10 +42,24 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
     private String uid;
     Intent intent;
 
+    private EditText etInput;// 这两个是用来搜索框的
+    private Button btnConfirm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_book);
+
+
+        etInput = findViewById(R.id.et_input);
+        btnConfirm = findViewById(R.id.btn_confirm);
+        // 设置按钮点击事件
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleButtonClick(); // 调用单独的方法
+            }
+        });
 
 //        intent = getIntent();
 //        uid = intent.getStringExtra("uid");
@@ -123,6 +140,31 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
         }
 
 
+    }
+
+    // 定义处理按钮点击的单独方法
+    private void handleButtonClick() {
+        // 获取输入框中的文本
+        //String inputText = etInput.getText().toString().trim();
+
+        String query = etInput.getText().toString().trim().toLowerCase(); // 获取用户输入
+        List<Book> filteredBooks = new ArrayList<>();
+
+        for (Book book : books) {
+            // 检查每本书的名称是否包含查询内容
+            if (book.getBookName().toLowerCase().contains(query)) {
+                filteredBooks.add(book); // 如果匹配则添加到筛选列表
+            }
+        }
+
+        if (filteredBooks.isEmpty()) {
+            ToastUtil.show(this, "没找到相关书籍");
+        } else {
+            // 更新适配器数据
+            //bookAdapter.updateBooks(filteredBooks); // 假设您的适配器有一个更新方法
+            bookAdapter = new BookAdapter(filteredBooks, FindBookActivity.this);
+            lv_find_book.setAdapter(bookAdapter); // 设置更新后的适配器
+        }
     }
 
 
