@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_user_info = findViewById(R.id.btn_user_info);
         btn_user_serch = findViewById(R.id.btn_user_serch);
         btn_user_borrow = findViewById(R.id.btn_user_borrow);
-        btn_user_return = findViewById(R.id.btn_return_borrow);
+        btn_user_return = findViewById(R.id.btn_user_return);
         btn_admin_info = findViewById(R.id.btn_admin_info);
         btn_admin_bookmanage = findViewById(R.id.btn_admin_bookmanage);
         btn_admin_borrow = findViewById(R.id.btn_admin_borrow);
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.btn_admin_borrow) {
             intent = new Intent(this, ViewBorrowActivity.class);
             startActivity(intent);
-        }  else if (view.getId() == R.id.btn_return_borrow) {
+        }  else if (view.getId() == R.id.btn_user_return) {
 //            ToastUtil.show(this,"return");
             intent = new Intent(this, ReturnBookActivity.class);
             startActivity(intent);
