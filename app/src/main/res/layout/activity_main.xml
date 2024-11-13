@@ -95,35 +95,47 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user_ser"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_user_info"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="读者服务\n（修改信息）" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_user_serch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="图书服务\n(查找\借阅图书)" />
+            <Button
+                android:id="@+id/btn_user_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="读者服务\n（修改信息）" />
 
-        <Button
-            android:id="@+id/btn_user_borrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="图书租借\n(借阅记录)" />
+            <Button
+                android:id="@+id/btn_user_serch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="图书服务\n(查找  借阅)" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_user_return"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="图书归还\n(归还)" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_user_borrow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="图书租借\n(借阅记录 归还)" />
+            <Button
+                android:id="@+id/btn_user_seat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="馆内座位\n(座位查看 预约)" />
+        </LinearLayout>
 
     </LinearLayout>
+
 </RelativeLayout>

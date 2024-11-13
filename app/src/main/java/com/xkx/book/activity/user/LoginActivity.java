@@ -75,30 +75,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent();
 
         if (v.getId() == R.id.btn_login) {
-            list = mHelper.queryByUid(uid, pwd);
-            for (User u : list) {
-                Log.e("ning", u.toString());
-                System.out.println("测试测试测试测试测试测试从" + u.getUserid());
-                if (u.getUserid().equals(uid)) {
-                    if (u.getPassword() == Long.parseLong(pwd)) {
-                        ToastUtil.show(this, "登录成功");
-                        // intent.putExtra("uid", uid);
+            list = mHelper.queryById(uid);
+            if(list.isEmpty()){
+                ToastUtil.show(this, "账号不存在");
+            } else {
+                User u = list.get(0);// 同名账号最多一个，因为我想让这个作为学号的
+                if (u.getUserid().equals(uid) && u.getPassword() == Long.parseLong(pwd)) {
+                    ToastUtil.show(this, "登录成功");
+                    // intent.putExtra("uid", uid);
 
-                        User_status = u.getUser_status();
+                    User_status = u.getUser_status();
 
-                        // 用 SharedPreferences 将 uid 存起来，方便后面的页面使用
-                        SharedPreferences.Editor edit = preferences.edit();
-                        edit.putString("uid", uid);
-                        edit.putInt("User_status", User_status);
-                        edit.apply();
+                    // 用 SharedPreferences 将 uid 存起来，方便后面的页面使用
+                    SharedPreferences.Editor edit = preferences.edit();
+                    edit.putString("uid", uid);
+                    edit.putInt("User_status", User_status);
+                    edit.apply();
 
-                        intent.setClass(this, MainActivity.class);
-                        startActivity(intent);
-                    }
+                    intent.setClass(this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    ToastUtil.show(this, "密码错误");
                 }
             }
         } else if (v.getId() == R.id.btn_register) {
-            ToastUtil.show(this, "注册");
             intent.setClass(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         }

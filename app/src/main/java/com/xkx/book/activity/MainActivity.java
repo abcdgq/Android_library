@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-import com.xkx.book.activity.book.ReturnBookActivity;
 import com.xkx.book.activity.borrow.BorrowBookActivity;
 import com.xkx.book.activity.book.FindBookActivity;
 import com.xkx.book.activity.book.ManageBookActivity;
+import com.xkx.book.activity.seat.ReserveSeatActivity;
 import com.xkx.book.activity.user.ManageUserActivity;
 import com.xkx.book.R;
 import com.xkx.book.activity.user.UserUpdateActivity;
@@ -24,7 +24,7 @@ import com.xkx.book.util.ToastUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_user_info, btn_user_serch, btn_user_borrow, btn_admin_info, btn_admin_bookmanage, btn_admin_borrow;
-    Button btn_user_return;
+    Button btn_user_seat;
     private CheckBox ck_admin;
     private BookDBHelper mHelper;
     private BorrowDBHelper nHelper;
@@ -94,10 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_user_info = findViewById(R.id.btn_user_info);
         btn_user_serch = findViewById(R.id.btn_user_serch);
         btn_user_borrow = findViewById(R.id.btn_user_borrow);
-        btn_user_return = findViewById(R.id.btn_user_return);
         btn_admin_info = findViewById(R.id.btn_admin_info);
         btn_admin_bookmanage = findViewById(R.id.btn_admin_bookmanage);
         btn_admin_borrow = findViewById(R.id.btn_admin_borrow);
+        btn_user_seat = findViewById(R.id.btn_user_seat);
 
         ck_admin.setOnClickListener(this);
         btn_user_info.setOnClickListener(this);
@@ -106,8 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_admin_info.setOnClickListener(this);
         btn_admin_bookmanage.setOnClickListener(this);
         btn_admin_borrow.setOnClickListener(this);
-
-        btn_user_return.setOnClickListener(this);
+        btn_user_seat.setOnClickListener(this);
 
 
     }
@@ -132,9 +131,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.btn_admin_borrow) {
             intent = new Intent(this, ViewBorrowActivity.class);
             startActivity(intent);
-        }  else if (view.getId() == R.id.btn_user_return) {
-//            ToastUtil.show(this,"return");
-            intent = new Intent(this, ReturnBookActivity.class);
+        } else if (view.getId() == R.id.btn_user_seat) {
+            intent = new Intent(this, ReserveSeatActivity.class);
             startActivity(intent);
         } else {
             ToastUtil.show(this,"error");

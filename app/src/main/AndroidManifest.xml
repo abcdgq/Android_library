@@ -47,7 +47,7 @@
             android:name=".activity.book.FindBookActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.book.ReturnBookActivity"
+            android:name=".activity.seat.ReserveSeatActivity"
             android:exported="false" />
         <activity
             android:name=".activity.user.UserUpdateActivity"
