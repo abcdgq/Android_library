@@ -1,39 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/seat_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="预约图书馆座位"
-        android:textSize="24sp"
-        android:layout_gravity="center" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="选择预约日期:" />
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_reserve"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="预约座位" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_reservation_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预约图书馆座位"
+            android:textSize="24sp"
+            android:layout_gravity="center" />
 
-</LinearLayout>
+        <!-- 日期选择器 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择预约日期:" />
+
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- 时间选择 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择预约时间段:" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rb_8_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="08:00 - 10:00" />
+
+            <RadioButton
+                android:id="@+id/rb_10_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10:00 - 12:00" />
+
+            <RadioButton
+                android:id="@+id/rb_12_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12:00 - 14:00" />
+
+            <RadioButton
+                android:id="@+id/rb_14_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14:00 - 16:00" />
+
+            <RadioButton
+                android:id="@+id/rb_16_18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16:00 - 18:00" />
+            <RadioButton
+                android:id="@+id/rb_18_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18:00 - 20:00" />
+            <RadioButton
+                android:id="@+id/rb_20_22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20:00 - 22:00" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_reserve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="预约座位" />
+
+        <TextView
+            android:id="@+id/tv_reservation_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="" />
+
+    </LinearLayout>
+</ScrollView>
