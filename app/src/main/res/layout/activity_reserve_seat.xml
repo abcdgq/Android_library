@@ -9,6 +9,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- 标题 -->
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -68,30 +69,45 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="16:00 - 18:00" />
+
             <RadioButton
                 android:id="@+id/rb_18_20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18:00 - 20:00" />
-            <RadioButton
-                android:id="@+id/rb_20_22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="20:00 - 22:00" />
         </RadioGroup>
 
+        <!-- 显示剩余座位数 -->
+        <TextView
+            android:id="@+id/tv_remaining_seats"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="剩余座位数：请选择时间段"
+            android:textSize="16sp"
+            android:paddingTop="8dp" />
+
+        <!-- 预约按钮 -->
         <Button
             android:id="@+id/btn_reserve"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="预约座位" />
+            android:text="预约" />
 
-        <TextView
-            android:id="@+id/tv_reservation_info"
+        <!-- 查看预约按钮 -->
+        <Button
+            android:id="@+id/btn_view_reservations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="" />
+            android:text="查看已有预约" />
 
+        <!-- 显示预约信息 -->
+        <TextView
+            android:id="@+id/tv_reservation_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="16sp"
+            android:paddingTop="16dp"
+            android:textColor="#FF0000" />
     </LinearLayout>
 </ScrollView>
