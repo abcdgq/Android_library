@@ -11,11 +11,12 @@
         android:text="借阅历史"
         android:textSize="25sp" />
 
+
     <LinearLayout
         android:id="@+id/ll_view_borrow_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_view_borrow_welcome"
+        android:layout_below="@id/tv_extra_info_1"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="15dp"
@@ -46,8 +47,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="图书名称" />
-
     </LinearLayout>
+
 
     <ListView
         android:id="@+id/lv_view_borrow"
@@ -55,6 +56,18 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ll_view_borrow_title"
         android:layout_marginTop="15dp" />
+
+
+    <TextView
+        android:id="@+id/tv_extra_info_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_view_borrow_welcome"
+        android:layout_marginTop="15dp"
+        android:padding="8dp"
+        android:text="额外信息行 1"
+        android:textSize="18sp"
+        android:gravity="center" />
 
 
 </RelativeLayout>
