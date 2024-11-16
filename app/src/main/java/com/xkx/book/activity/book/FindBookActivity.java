@@ -35,6 +35,11 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
     private String bookId;
     private String bookName;
     private int bookNumber;
+
+    private String bookTags;
+    private String bookIntroduction;
+    private String bookLocation;
+
     private BookAdapter bookAdapter;
     private BookDBHelper mHelper;
     private BorrowDBHelper nHelper;
@@ -63,8 +68,6 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
-//        intent = getIntent();
-//        uid = intent.getStringExtra("uid");
         SharedPreferences sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
         uid = sharedPreferences.getString("uid", "");
 
@@ -93,6 +96,7 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
         nHistory.openReadLink();
 
         books = mHelper.queryAll();
+
         for (Book u : books) {
             Log.e("ning", u.toString());
         }
@@ -115,10 +119,23 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
         bookId = book.getBookId();
         bookName = book.getBookName();
         bookNumber = book.getBookNumber();
+        bookTags = book.getBookTags();
+        bookIntroduction = book.getBookIntroduction();
+        bookLocation = book.getBookLocation();
+
         Log.e("ning", bookId);
 
+        String message = "图书位置：" + bookLocation +
+                "\n图书标签: " + bookTags  +
+                "\n图书简介: " + bookIntroduction;
+
+
         if (bookNumber <= 0) {
-            ToastUtil.show(this, "该图书余量:0，不可借阅");
+            AlertDialog.Builder builder = new AlertDialog.Builder(FindBookActivity.this);
+            builder.setTitle("该图书余量:0，不可借阅");
+            builder.setMessage(message);
+            builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
+            builder.show();
         } else {
             boolean flag = false;
             // 查看某学号用户的全部借阅信息
@@ -127,19 +144,25 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
                 if (borrow.getBorrowBookId().equals(bookId))
                     flag = true;
             }
+
             if (flag) {
-                ToastUtil.show(this, "你已借阅，不可重复借阅");
+                AlertDialog.Builder builder = new AlertDialog.Builder(FindBookActivity.this);
+                builder.setTitle("你已借阅，不可重复借阅");
+                builder.setMessage(message);
+                builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
+                builder.show();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(FindBookActivity.this);
                 builder.setTitle("确认借阅？");
+                builder.setMessage(message);
                 builder.setPositiveButton("确认", (dialog, whichButton) -> {
                     //得到bookid 的书籍 租借信息
 
-                    Book borrowbook = new Book(bookId, bookName, bookNumber - 1);
+                    Book borrowbook = new Book(bookId, bookName, bookNumber - 1,bookTags,bookIntroduction,bookLocation);
                     Borrow borrow = new Borrow(uid, bookId, bookName);
                     if (mHelper.update(borrowbook) > 0 && nHelper.insert(borrow) > 0)
                         nHistory.insert(borrow);
-                        ToastUtil.show(this, "借书成功");
+                    ToastUtil.show(this, "借书成功");
                     onStart();
                 });
                 builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());

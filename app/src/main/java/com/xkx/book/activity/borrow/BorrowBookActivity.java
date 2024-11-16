@@ -81,6 +81,7 @@ public class BorrowBookActivity extends AppCompatActivity implements AdapterView
         builder.setPositiveButton("确认", (dialog, whichButton) -> {
 
             String bookid = null, bookname = null;
+            String bookTags = null,bookIntroduction = null,bookLocation = null;
             int booknum = 0;
 
             //获取当前book里边的数量
@@ -89,8 +90,11 @@ public class BorrowBookActivity extends AppCompatActivity implements AdapterView
                 bookid = book_id;
                 bookname = book1.bookName;
                 booknum = book1.bookNumber;
+                bookTags = book1.getBookTags();
+                bookIntroduction = book1.getBookIntroduction();
+                bookLocation = book1.getBookLocation();
             }
-            Book returnbook = new Book(bookid, bookname, booknum + 1);
+            Book returnbook = new Book(bookid, bookname, booknum + 1,bookTags,bookIntroduction,bookLocation);
 
             if (nHelper.update(returnbook) > 0 && mHelper.deleteByid(borrowid, bookid) > 0) {
                 ToastUtil.show(this, "归还成功！");

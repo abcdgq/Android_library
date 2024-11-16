@@ -12,7 +12,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:minHeight="40dp">
 
         <TextView
             android:id="@+id/tv_book_id_show"

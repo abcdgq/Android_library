@@ -42,7 +42,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
 
             if (!tempBookId.isEmpty() && !tempBookName.isEmpty() && !tempBookNumber.isEmpty()) {
                 // 声明一个用户信息对象，并填写它的字段值
-                Book book = new Book(tempBookId, tempBookName, Integer.parseInt(tempBookNumber));
+                Book book = new Book(tempBookId, tempBookName, Integer.parseInt(tempBookNumber),"","","");
 
                 if (mHelper.insert(book) > 0) {
                     ToastUtil.show(this, "添加成功！");

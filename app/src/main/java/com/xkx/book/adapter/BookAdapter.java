@@ -19,7 +19,8 @@ public class BookAdapter extends BaseAdapter {
     private Context context;
 
     public BookAdapter(List<Book> mData, Context context) {
-        this.mData = mData;
+        //this.mData = mData;
+        this.mData = (mData != null) ? mData : new ArrayList<>(); // 确保 mData 不为 null
         this.context = context;
     }
 

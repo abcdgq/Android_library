@@ -26,6 +26,7 @@ public class ViewBorrowActivity extends AppCompatActivity implements AdapterView
     private BookDBHelper nHelper;
     private BorrowAdapter borrowAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,8 @@ public class ViewBorrowActivity extends AppCompatActivity implements AdapterView
         userId = borrow.getBorrowId();
         bookId = borrow.getBorrowBookId();
         bookName = borrow.getBorrowBookName();
+
+
         Log.e("ning", borrow.toString());
         Log.e("ning", bookId);
         AlertDialog.Builder builder = new AlertDialog.Builder(ViewBorrowActivity.this);
@@ -72,12 +75,18 @@ public class ViewBorrowActivity extends AppCompatActivity implements AdapterView
         builder.setPositiveButton("确认", (dialog, whichButton) -> {
             // 获取图书数量
             int booknum = 0;
+            String bookTags  = null;
+            String bookIntroduction = null;
+            String bookLocation = null;
             List<Book> books = nHelper.queryById(bookId);
-            for (Book b : books) {
+            for (Book b : books) { // 实际上应该只有第一个，这个sb原本写的啥玩意
                 booknum = b.bookNumber;
+                bookTags = b.getBookTags();
+                bookIntroduction = b.getBookIntroduction();
+                bookLocation = b.getBookLocation();
             }
             // 更新图书信息
-            Book returnbook = new Book(bookId, bookName, booknum + 1);
+            Book returnbook = new Book(bookId, bookName, booknum + 1,bookTags,bookIntroduction,bookLocation);
             // 删除借阅信息
             if (nHelper.update(returnbook) > 0 && mHelper.deleteByid(userId, bookId) > 0)
                 ToastUtil.show(this, "删除成功");

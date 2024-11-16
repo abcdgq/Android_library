@@ -40,13 +40,16 @@ public class BookDBHelper extends SQLiteOpenHelper {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 "book_id varchar(30)PRIMARY KEY," +
                 "book_name varchar(30)," +
-                "book_number int" +
+                "book_number int," +
+                "book_tags varchar(50)," +
+                "book_introduction varchar(200)," +
+                "book_Location varchar(50)" +
                 ")";
         db.execSQL(sql);
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number)Values('14923275','中国近现代史纲要',10)");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number)Values('14923276','Android移动应用开发',0)");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number)Values('14312712','电子技术基础',10)");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number)Values('18964989','C语言项目开发实战入门',5)");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14923275','中国近现代史纲要',10,'文学与艺术&社会科学','无','2层-206室-123书架-1231')");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14923276','Android移动应用开发',0,'科学与技术','介绍Andorid课程的指导书','1层-205室-123书架-1201')");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14312712','电子技术基础',10,'科学与技术','无','3层-206室-100书架-1031')");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('18964989','C语言项目开发实战入门',5,'科学与技术','无','2层-006室-010书架-0031')");
     }
 
     //打开数据库的读连接
@@ -88,6 +91,10 @@ public class BookDBHelper extends SQLiteOpenHelper {
         values.put("book_id", book.bookId);
         values.put("book_name", book.bookName);
         values.put("book_number", book.bookNumber);
+        values.put("book_tags", book.bookTags);
+        values.put("book_introduction", book.bookIntroduction);
+        values.put("book_location", book.bookLocation);
+
         //执行插入记录动作，该语句返回插入记录的行号
         //如果第三个参数values 为null或者元素个数为0，由于insert()方法必须添加一条除了主键之外其它字段
         //
@@ -110,6 +117,9 @@ public class BookDBHelper extends SQLiteOpenHelper {
         values.put("book_id", book.bookId);
         values.put("book_name", book.bookName);
         values.put("book_number", book.bookNumber);
+        values.put("book_tags", book.bookTags);
+        values.put("book_introduction", book.bookIntroduction);
+        values.put("book_location", book.bookLocation);
         return mWDB.update(TABLE_NAME, values, "book_id=?", new String[]{book.bookId});
     }
 
@@ -124,6 +134,10 @@ public class BookDBHelper extends SQLiteOpenHelper {
             book.bookId = cursor.getString(0);
             book.bookName = cursor.getString(1);
             book.bookNumber = cursor.getInt(2);
+            book.bookTags = cursor.getString(3);
+            book.bookIntroduction = cursor.getString(4);
+            book.bookLocation = cursor.getString(5);
+
             list.add(book);
         }
 
@@ -141,6 +155,9 @@ public class BookDBHelper extends SQLiteOpenHelper {
             book.bookId = cursor.getString(0);
             book.bookName = cursor.getString(1);
             book.bookNumber = cursor.getInt(2);
+            book.bookTags = cursor.getString(3);
+            book.bookIntroduction = cursor.getString(4);
+            book.bookLocation = cursor.getString(5);
             list.add(book);
         }
         return list;
@@ -157,6 +174,9 @@ public class BookDBHelper extends SQLiteOpenHelper {
             book.bookId = cursor.getString(0);
             book.bookName = cursor.getString(1);
             book.bookNumber = cursor.getInt(2);
+            book.bookTags = cursor.getString(3);
+            book.bookIntroduction = cursor.getString(4);
+            book.bookLocation = cursor.getString(5);
             list.add(book);
         }
         return list;

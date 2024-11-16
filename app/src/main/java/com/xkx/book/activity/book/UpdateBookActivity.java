@@ -54,7 +54,7 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
 
             if (!bookId.isEmpty() && !bookName.isEmpty() && !str_bookNumber.isEmpty()) {
                 // 声明一个用户信息对象，并填写它的字段值
-                Book book = new Book(bookId, bookName, Integer.parseInt(str_bookNumber));
+                Book book = new Book(bookId, bookName, Integer.parseInt(str_bookNumber),"","","");
 
                 if (mHelper.update(book) > 0) {
                     ToastUtil.show(this, "修改成功！");

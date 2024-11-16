@@ -66,25 +66,25 @@ public class BorrowHistoryActivity extends AppCompatActivity implements AdapterV
         bookName = borrow.getBorrowBookName();
         Log.e("ning", borrow.toString());
         Log.e("ning", bookId);
-        AlertDialog.Builder builder = new AlertDialog.Builder(BorrowHistoryActivity.this);
-        builder.setTitle("是否删除该借阅记录？");
-        // 确认
-        builder.setPositiveButton("确认", (dialog, whichButton) -> {
-            // 获取图书数量
-            int booknum = 0;
-            List<Book> books = nHelper.queryById(bookId);
-            for (Book b : books) {
-                booknum = b.bookNumber;
-            }
-            // 更新图书信息
-            Book returnbook = new Book(bookId, bookName, booknum + 1);
-            // 删除借阅信息
-            if (nHelper.update(returnbook) > 0 && mHistory.deleteByid(userId, bookId) > 0)
-                ToastUtil.show(this, "删除成功");
-            onStart();
-        });
-        // 取消
-        builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
-        builder.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(BorrowHistoryActivity.this);
+//        builder.setTitle("是否删除该借阅记录？");
+//        // 确认
+//        builder.setPositiveButton("确认", (dialog, whichButton) -> {
+//            // 获取图书数量
+//            int booknum = 0;
+//            List<Book> books = nHelper.queryById(bookId);
+//            for (Book b : books) {
+//                booknum = b.bookNumber;
+//            }
+//            // 更新图书信息
+//            Book returnbook = new Book(bookId, bookName, booknum + 1);
+//            // 删除借阅信息
+//            if (nHelper.update(returnbook) > 0 && mHistory.deleteByid(userId, bookId) > 0)
+//                ToastUtil.show(this, "删除成功");
+//            onStart();
+//        });
+//        // 取消
+//        builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
+//        builder.show();
     }
 }
