@@ -40,7 +40,7 @@ public class FindWayAdapter extends RecyclerView.Adapter<FindWayAdapter.FindWayV
     @Override
     public void onBindViewHolder(@NonNull FindWayViewHolder holder, int position) {
         // 设置完整数据，显示在顶部
-        holder.tvFullData.setText("完整位置数据：" + fullData);
+        holder.tvFullData.setText("完整位置数据：" + fullData + "\n\n" + "查看具体位置，请左右滑动");
 
         // 根据页面位置设置具体的文本内容和图片
         switch (position) {

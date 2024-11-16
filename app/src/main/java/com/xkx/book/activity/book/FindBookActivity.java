@@ -135,6 +135,14 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
             builder.setTitle("该图书余量:0，不可借阅");
             builder.setMessage(message);
             builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
+
+            builder.setPositiveButton("查看导航图", (dialog, whichButton) -> {
+                // 在此处处理跳转到另一个界面的逻辑
+                Intent intent = new Intent(FindBookActivity.this, FindWayActivity.class); // 替换为实际的目标活动类
+                intent.putExtra("location",bookLocation);
+                startActivity(intent);  // 启动新活动
+            });
+
             builder.show();
         } else {
             boolean flag = false;
@@ -150,12 +158,18 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
                 builder.setTitle("你已借阅，不可重复借阅");
                 builder.setMessage(message);
                 builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
+                builder.setPositiveButton("查看导航图", (dialog, whichButton) -> {
+                    // 在此处处理跳转到另一个界面的逻辑
+                    Intent intent = new Intent(FindBookActivity.this, FindWayActivity.class); // 替换为实际的目标活动类
+                    intent.putExtra("location",bookLocation);
+                    startActivity(intent);  // 启动新活动
+                });
                 builder.show();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(FindBookActivity.this);
                 builder.setTitle("确认借阅？");
                 builder.setMessage(message);
-                builder.setPositiveButton("确认", (dialog, whichButton) -> {
+                builder.setPositiveButton("借阅", (dialog, whichButton) -> {
                     //得到bookid 的书籍 租借信息
 
                     Book borrowbook = new Book(bookId, bookName, bookNumber - 1,bookTags,bookIntroduction,bookLocation);
@@ -166,6 +180,14 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
                     onStart();
                 });
                 builder.setNegativeButton("取消", (dialog, whichButton) -> dialog.dismiss());
+
+                builder.setNeutralButton("查看导航图", (dialog, whichButton) -> {
+                    // 在此处处理跳转到另一个界面的逻辑
+                    Intent intent = new Intent(FindBookActivity.this, FindWayActivity.class); // 替换为实际的目标活动类
+                    intent.putExtra("location",bookLocation);
+                    startActivity(intent);  // 启动新活动
+                });
+
                 builder.show();
             }
         }
