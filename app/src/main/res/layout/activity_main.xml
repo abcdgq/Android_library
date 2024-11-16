@@ -165,6 +165,20 @@
                 android:text="馆内座位\n(座位查看 预约)" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_user_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="借阅历史\n(借阅记录)" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
