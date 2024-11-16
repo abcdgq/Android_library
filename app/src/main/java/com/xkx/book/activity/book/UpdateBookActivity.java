@@ -16,6 +16,7 @@ import com.xkx.book.util.ToastUtil;
 public class UpdateBookActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText et_book_id, et_book_name, et_book_number;
+    private EditText et_book_location, et_book_tags, et_book_introduction;
     private Button btn_save, btn_cancel;
     private Book book;
     private BookDBHelper mHelper;
@@ -28,6 +29,11 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
         et_book_id = findViewById(R.id.et_book_id);
         et_book_name = findViewById(R.id.et_book_name);
         et_book_number = findViewById(R.id.et_book_number);
+
+        et_book_introduction = findViewById(R.id.et_book_introduction);
+        et_book_tags = findViewById(R.id.et_book_tags);
+        et_book_location = findViewById(R.id.et_book_location);
+
         btn_save = findViewById(R.id.btn_save);
         btn_cancel = findViewById(R.id.btn_cancel);
 
@@ -41,6 +47,8 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
         et_book_name.setText(view_book_name);
         et_book_number.setText(String.valueOf(view_book_num));
 
+
+
         btn_save.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
     }
@@ -52,9 +60,13 @@ public class UpdateBookActivity extends AppCompatActivity implements View.OnClic
             String bookName = et_book_name.getText().toString();
             String str_bookNumber = et_book_number.getText().toString();
 
+            String tempBookTags = et_book_tags.getText().toString();
+            String tempBookIntroduction = et_book_introduction.getText().toString();
+            String tempBookLocation = et_book_location.getText().toString();
+
             if (!bookId.isEmpty() && !bookName.isEmpty() && !str_bookNumber.isEmpty()) {
                 // 声明一个用户信息对象，并填写它的字段值
-                Book book = new Book(bookId, bookName, Integer.parseInt(str_bookNumber),"","","");
+                Book book = new Book(bookId, bookName, Integer.parseInt(str_bookNumber),tempBookTags,tempBookIntroduction,tempBookLocation);
 
                 if (mHelper.update(book) > 0) {
                     ToastUtil.show(this, "修改成功！");
