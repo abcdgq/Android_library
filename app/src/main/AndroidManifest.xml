@@ -49,6 +49,12 @@
         <activity
             android:name=".activity.seat.ReserveSeatActivity"
             android:exported="false" />
+        <activity android:name=".activity.seat.ViewReservationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.user.UserUpdateActivity"
             android:exported="false" />

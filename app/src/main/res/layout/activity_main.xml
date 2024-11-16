@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+    <!-- 标题图片 -->
     <ImageView
         android:id="@+id/img"
         android:layout_width="match_parent"
@@ -14,6 +15,7 @@
         android:scaleType="center"
         android:src="@drawable/mtitle" />
 
+    <!-- 管理员模式复选框 -->
     <CheckBox
         android:id="@+id/ck_admin"
         android:layout_width="wrap_content"
@@ -24,6 +26,7 @@
         android:layout_marginRight="1dp"
         android:text="管理员模式" />
 
+    <!-- 用户服务标题 -->
     <TextView
         android:id="@+id/user_ser"
         android:layout_width="wrap_content"
@@ -32,6 +35,7 @@
         android:layout_marginTop="20dp"
         android:text="用户服务" />
 
+    <!-- 管理员服务标题 -->
     <TextView
         android:id="@+id/admin_ser"
         android:layout_width="wrap_content"
@@ -39,7 +43,8 @@
         android:layout_below="@id/L2"
         android:layout_marginTop="30dp"
         android:text="管理员服务" />
-    <!--    下划线-->
+
+    <!-- 下划线分隔 -->
     <ImageView
         android:id="@+id/login_diver2"
         android:layout_width="match_parent"
@@ -47,7 +52,6 @@
         android:layout_below="@id/admin_ser"
         android:background="@color/input_text_hint" />
 
-    <!--    下划线-->
     <ImageView
         android:id="@+id/login_diver1"
         android:layout_width="match_parent"
@@ -55,40 +59,62 @@
         android:layout_below="@id/user_ser"
         android:background="@color/input_text_hint" />
 
+    <!-- 管理员服务按钮列表 -->
     <LinearLayout
         android:id="@+id/L1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/admin_ser"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn_admin_info"
-            android:layout_width="wrap_content"
+        <!-- 第一行按钮：权限管理和图书管理 -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="权限管理\n(用户信息)" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_admin_bookmanage"
-            android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/btn_admin_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="权限管理\n(用户信息)" />
+
+            <Button
+                android:id="@+id/btn_admin_bookmanage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="图书管理\n(管理图书)" />
+        </LinearLayout>
+
+        <!-- 第二行按钮：系统管理和座位预约 -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="图书管理\n(管理图书)" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_admin_borrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:text="系统管理\n(借阅记录)" />
+            <Button
+                android:id="@+id/btn_admin_borrow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:enabled="false"
+                android:text="系统管理\n(借阅记录)" />
 
+            <Button
+                android:id="@+id/btn_admin_reserve"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="座位预约\n(查看预约)" />
+        </LinearLayout>
     </LinearLayout>
 
+    <!-- 用户服务按钮列表 -->
     <LinearLayout
         android:id="@+id/L2"
         android:layout_width="match_parent"
@@ -97,6 +123,7 @@
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
+        <!-- 用户信息和图书查询按钮 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,9 +141,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="图书服务\n(查找  借阅)" />
+                android:text="图书服务\n(查找 借阅)" />
         </LinearLayout>
 
+        <!-- 图书借阅与座位预约按钮 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="图书租借\n(借阅记录 归还)" />
+
             <Button
                 android:id="@+id/btn_user_seat"
                 android:layout_width="0dp"

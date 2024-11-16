@@ -1,4 +1,3 @@
-// ReservationDBHelper.java
 package com.xkx.book.database;
 
 import android.content.Context;
