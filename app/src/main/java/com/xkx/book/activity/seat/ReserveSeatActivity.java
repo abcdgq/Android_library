@@ -6,10 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,8 @@ public class ReserveSeatActivity extends AppCompatActivity {
     private RadioGroup radioGroupTime;
     private TextView tvReservationInfo, tvRemainingSeats;
     private String uid;
+    private Spinner spinnerSeatNumber;
+    private ArrayAdapter<String> seatAdapter;
 
     private ReservationDBHelper dbHelper;
     private List<Reservation> userReservations;
@@ -53,6 +57,7 @@ public class ReserveSeatActivity extends AppCompatActivity {
         Button btnViewReservations = findViewById(R.id.btn_view_reservations);
         tvReservationInfo = findViewById(R.id.tv_reservation_info);
         tvRemainingSeats = findViewById(R.id.tv_remaining_seats);
+        spinnerSeatNumber = findViewById(R.id.spinner_seat_number);
 
         dbHelper = new ReservationDBHelper(this);
         userReservations = new ArrayList<>();
@@ -60,6 +65,21 @@ public class ReserveSeatActivity extends AppCompatActivity {
         // 初始化剩余座位数
         updateRemainingSeats();
 
+
+
+        // 初始化座位号选择器
+        spinnerSeatNumber.setEnabled(false); // 默认禁用，直到选择时间段
+
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+        datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int month, int day) {
+                // 调用已有的方法处理日期变化
+                updateRemainingSeats();
+            }
+        });
         radioGroupTime.setOnCheckedChangeListener((group, checkedId) -> updateRemainingSeats());
 
         btnReserve.setOnClickListener(v -> reserveSeat());
@@ -71,6 +91,7 @@ public class ReserveSeatActivity extends AppCompatActivity {
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year = datePicker.getYear();
+        String date = String.format("%04d-%02d-%02d", year, month + 1, day);
         int selectedId = radioGroupTime.getCheckedRadioButtonId();
 
         if (selectedId == -1) {
@@ -96,7 +117,7 @@ public class ReserveSeatActivity extends AppCompatActivity {
 
         if (selectedDate.after(currentDate) && selectedDate.before(endDate) && !selectedDate.equals(currentDate)) {
             // 查询数据库获取当前时段的剩余座位
-            int seatNumber = findAvailableSeat(timeSlot);
+            int seatNumber = getAvailableSeatFromSpinner(timeSlot);
             if (seatNumber == -1) {
                 tvReservationInfo.setText("该时段座位已满，请选择其他时段。");
             } else {
@@ -131,46 +152,6 @@ public class ReserveSeatActivity extends AppCompatActivity {
         return hasReservation;
     }
 
-    private int findAvailableSeat(String timeSlot) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // 查询此时段的座位状态
-        String selection = ReservationDBHelper.COLUMN_TIME_SLOT + " = ?";
-        String[] selectionArgs = { timeSlot };
-
-        Cursor cursor = db.query(ReservationDBHelper.TABLE_RESERVATIONS,
-                new String[]{ReservationDBHelper.COLUMN_SEAT_NUMBER},
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null);
-
-        boolean[] seats = new boolean[20]; // 标记座位的预约情况
-
-        int seatNumberColumnIndex = cursor.getColumnIndex(ReservationDBHelper.COLUMN_SEAT_NUMBER);
-        if (seatNumberColumnIndex == -1) {
-            // 如果列索引无效，则记录日志并返回
-            //Log.e("Database", "Column " + ReservationDBHelper.COLUMN_SEAT_NUMBER + " not found.");
-            return -1; // 如果查询失败，返回 -1
-        }
-
-        while (cursor.moveToNext()) {
-            int seatNumber = cursor.getInt(seatNumberColumnIndex);
-            seats[seatNumber - 1] = true; // 标记为已预约
-        }
-
-        cursor.close();
-
-        // 查找一个可用的座位
-        for (int i = 0; i < seats.length; i++) {
-            if (!seats[i]) {
-                return i + 1; // 返回未被预约的座位号
-            }
-        }
-        return -1; // 所有座位都已预约
-    }
-
 
     private boolean addReservationToDatabase(Reservation reservation) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -192,8 +173,9 @@ public class ReserveSeatActivity extends AppCompatActivity {
             new AlertDialog.Builder(this)
                     .setTitle("您的预约(点击取消预约)")
                     .setAdapter(adapter, (dialog, which) -> {
-                        // Handle reservation cancellation
-                        cancelReservation(userReservations.get(which));
+                        // 处理点击某个预约项时，弹出确认取消对话框
+                        Reservation selectedReservation = userReservations.get(which);
+                        showCancelConfirmationDialog(selectedReservation);  // 调用方法显示确认对话框
                     })
                     .show();
         } else {
@@ -201,7 +183,20 @@ public class ReserveSeatActivity extends AppCompatActivity {
         }
     }
 
-    private void cancelReservation(Reservation reservation) {
+    // 显示取消确认对话框
+    private void showCancelConfirmationDialog(Reservation reservation) {
+        new AlertDialog.Builder(this)
+                .setTitle("确认取消预约")
+                .setMessage("您确定要取消此预约吗？")
+                .setPositiveButton("确认", (dialog, which) -> {
+                    // 用户确认取消，执行取消操作
+                    cancelReservation(reservation);
+                })
+                .setNegativeButton("取消", null)  // 用户取消，不做任何操作
+                .show();
+    }
+
+    public void cancelReservation(Reservation reservation) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // 删除预约记录
@@ -260,7 +255,6 @@ public class ReserveSeatActivity extends AppCompatActivity {
         return reservations;
     }
 
-
     // 更新剩余座位数
     private void updateRemainingSeats() {
         int selectedId = radioGroupTime.getCheckedRadioButtonId();
@@ -271,14 +265,82 @@ public class ReserveSeatActivity extends AppCompatActivity {
 
         int availableSeats = getAvailableSeats(timeSlot);
         tvRemainingSeats.setText("剩余座位数：" + availableSeats);
+
+        if (availableSeats > 0) {
+            List<String> availableSeatList = getAvailableSeatsList(timeSlot);
+            seatAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, availableSeatList);
+            seatAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerSeatNumber.setAdapter(seatAdapter);
+            spinnerSeatNumber.setEnabled(true); // 启用座位选择器
+        } else {
+            spinnerSeatNumber.setEnabled(false); // 如果没有座位，禁用选择器
+        }
     }
+
+    private int getAvailableSeatFromSpinner(String timeSlot) {
+        int seatNumber = -1;
+        if (spinnerSeatNumber.getSelectedItem() != null) {
+            seatNumber = Integer.parseInt(spinnerSeatNumber.getSelectedItem().toString());
+        }
+        return seatNumber;
+    }
+
+    private List<String> getAvailableSeatsList(String timeSlot) {
+        List<String> availableSeats = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+        String date = String.format(day + "/" + (month + 1) + "/" + year);
+
+        // 查询某个日期和时间段已预约的座位
+        String selection = ReservationDBHelper.COLUMN_DATE + " = ? AND " + ReservationDBHelper.COLUMN_TIME_SLOT + " = ?";
+        String[] selectionArgs = {date, timeSlot};
+
+        Cursor cursor = db.query(ReservationDBHelper.TABLE_RESERVATIONS,
+                new String[]{ReservationDBHelper.COLUMN_SEAT_NUMBER},
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+
+        boolean[] seats = new boolean[20]; // 标记座位的预约情况
+
+        int seatNumberColumnIndex = cursor.getColumnIndex(ReservationDBHelper.COLUMN_SEAT_NUMBER);
+        if (seatNumberColumnIndex == -1) {
+            cursor.close();
+            return availableSeats; // 如果查询失败，返回空的座位列表
+        }
+
+        // 标记已预约的座位
+        while (cursor.moveToNext()) {
+            int seatNumber = cursor.getInt(seatNumberColumnIndex);
+            seats[seatNumber - 1] = true; // 标记为已预约
+        }
+        cursor.close();
+
+        // 获取剩余座位
+        for (int i = 0; i < seats.length; i++) {
+            if (!seats[i]) {
+                availableSeats.add(String.valueOf(i + 1)); // 添加未被预约的座位号
+            }
+        }
+
+        return availableSeats;
+    }
+
 
     private int getAvailableSeats(String timeSlot) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
+        int day = datePicker.getDayOfMonth();
+        int month = datePicker.getMonth();
+        int year = datePicker.getYear();
+        String date = String.format(day + "/" + (month + 1) + "/" + year);
 
-        // 查询已预约的座位
-        String selection = ReservationDBHelper.COLUMN_TIME_SLOT + " = ?";
-        String[] selectionArgs = { timeSlot };
+        // 查询某个日期和时间段已预约的座位
+        String selection = ReservationDBHelper.COLUMN_DATE + " = ? AND " + ReservationDBHelper.COLUMN_TIME_SLOT + " = ?";
+        String[] selectionArgs = {date, timeSlot};
 
         Cursor cursor = db.query(ReservationDBHelper.TABLE_RESERVATIONS,
                 new String[]{ReservationDBHelper.COLUMN_SEAT_NUMBER},
@@ -294,9 +356,11 @@ public class ReserveSeatActivity extends AppCompatActivity {
         if (seatNumberColumnIndex == -1) {
             // 如果列索引无效，则记录日志并返回
             //Log.e("Database", "Column " + ReservationDBHelper.COLUMN_SEAT_NUMBER + " not found.");
+            cursor.close();
             return 0; // 如果查询失败，返回 0
         }
 
+        // 标记已预约的座位
         while (cursor.moveToNext()) {
             int seatNumber = cursor.getInt(seatNumberColumnIndex);
             seats[seatNumber - 1] = true; // 标记为已预约
@@ -307,10 +371,12 @@ public class ReserveSeatActivity extends AppCompatActivity {
         // 计算剩余座位数
         int availableSeats = 0;
         for (boolean seat : seats) {
-            if (!seat) availableSeats++;
+            if (!seat) availableSeats++; // 如果座位没有被预约，则计数为可用座位
         }
 
         return availableSeats;
     }
 
+
 }
+

@@ -13,12 +13,12 @@ import com.xkx.book.enity.Reservation;
 
 import java.util.List;
 
-public class ReservationAdapter extends ArrayAdapter<Reservation> {
+public class ViewReservationAdapter extends ArrayAdapter<Reservation> {
 
     private Context context;
     private List<Reservation> reservations;
 
-    public ReservationAdapter(Context context, List<Reservation> reservations) {
+    public ViewReservationAdapter(Context context, List<Reservation> reservations) {
         super(context, 0, reservations);
         this.context = context;
         this.reservations = reservations;
@@ -38,6 +38,12 @@ public class ReservationAdapter extends ArrayAdapter<Reservation> {
         text1.setText("时间段: " + reservation.getTimeSlot() + " | 座位: " + reservation.getSeatNumber());
         text2.setText("日期: " + reservation.getDate() + " | 用户名: " + reservation.getUserId());
 
+        convertView.setOnClickListener(v -> {
+            if (context instanceof ViewReservationActivity) {
+                ((ViewReservationActivity) context).showCancelConfirmationDialog(reservation);
+            }
+        });
         return convertView;
     }
+
 }

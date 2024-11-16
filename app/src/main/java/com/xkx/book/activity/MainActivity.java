@@ -15,6 +15,7 @@ import com.xkx.book.activity.book.FindBookActivity;
 import com.xkx.book.activity.book.ManageBookActivity;
 import com.xkx.book.activity.borrow.BorrowHistoryActivity;
 import com.xkx.book.activity.seat.ReserveSeatActivity;
+import com.xkx.book.activity.seat.ViewReservationActivity;
 import com.xkx.book.activity.user.ManageUserActivity;
 import com.xkx.book.R;
 import com.xkx.book.activity.user.UserUpdateActivity;
@@ -25,7 +26,7 @@ import com.xkx.book.database.BorrowDBHistory;
 import com.xkx.book.util.ToastUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button btn_user_info, btn_user_serch, btn_user_borrow, btn_admin_info, btn_admin_bookmanage, btn_admin_borrow;
+    Button btn_user_info, btn_user_serch, btn_user_borrow, btn_admin_info, btn_admin_bookmanage, btn_admin_borrow, btn_admin_reserve;
     Button btn_user_seat;
     Button btn_user_history;    //
 
@@ -92,12 +93,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn_admin_info.setEnabled(false);
             btn_admin_bookmanage.setEnabled(false);
             btn_admin_borrow.setEnabled(false);
+            btn_admin_reserve.setEnabled(false);
+
 
         } else {
             ck_admin.setChecked(true);
             btn_admin_info.setEnabled(true);
             btn_admin_bookmanage.setEnabled(true);
             btn_admin_borrow.setEnabled(true);
+            btn_admin_reserve.setEnabled(true);
         }
     }
 
@@ -113,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_admin_bookmanage = findViewById(R.id.btn_admin_bookmanage);
         btn_admin_borrow = findViewById(R.id.btn_admin_borrow);
         btn_user_seat = findViewById(R.id.btn_user_seat);
+        btn_admin_reserve = findViewById(R.id.btn_admin_reserve);
 
         ck_admin.setOnClickListener(this);
         btn_user_info.setOnClickListener(this);
@@ -125,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_admin_bookmanage.setOnClickListener(this);
         btn_admin_borrow.setOnClickListener(this);
         btn_user_seat.setOnClickListener(this);
+        btn_admin_reserve.setOnClickListener(this);
 
 
     }
@@ -156,6 +162,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (view.getId() == R.id.btn_user_seat) {
             intent = new Intent(this, ReserveSeatActivity.class);
+            startActivity(intent);
+        } else if (view.getId() == R.id.btn_admin_reserve) {
+            intent = new Intent(this, ViewReservationActivity.class);
             startActivity(intent);
         } else {
             ToastUtil.show(this,"error");

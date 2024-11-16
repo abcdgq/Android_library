@@ -86,6 +86,12 @@
             android:textSize="16sp"
             android:paddingTop="8dp" />
 
+        <Spinner
+            android:id="@+id/spinner_seat_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
         <!-- 预约按钮 -->
         <Button
             android:id="@+id/btn_reserve"
