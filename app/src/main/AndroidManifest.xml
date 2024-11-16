@@ -17,6 +17,9 @@
             android:name=".activity.borrow.BorrowBookActivity"
             android:exported="false" />
         <activity
+            android:name=".activity.borrow.BorrowHistoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.borrow.ViewBorrowActivity"
             android:exported="false" />
         <activity

@@ -19,6 +19,7 @@ import com.xkx.book.R;
 import com.xkx.book.adapter.BookAdapter;
 import com.xkx.book.database.BookDBHelper;
 import com.xkx.book.database.BorrowDBHelper;
+import com.xkx.book.database.BorrowDBHistory;
 import com.xkx.book.enity.Book;
 import com.xkx.book.enity.Borrow;
 import com.xkx.book.util.ToastUtil;
@@ -37,6 +38,7 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
     private BookAdapter bookAdapter;
     private BookDBHelper mHelper;
     private BorrowDBHelper nHelper;
+    private BorrowDBHistory nHistory;
     List<Book> books = null;
     //当前用户的id
     private String uid;
@@ -79,11 +81,16 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
 //        //获取数据库帮助器的实例
         mHelper = BookDBHelper.getInstance(this);
         nHelper = BorrowDBHelper.getInstance(this);
+        nHistory = BorrowDBHistory.getInstance(this);
+
         //打开数据库帮助器的读写连接
         mHelper.openWriteLink();
         mHelper.openReadLink();
         nHelper.openWriteLink();
         nHelper.openReadLink();
+
+        nHistory.openWriteLink();
+        nHistory.openReadLink();
 
         books = mHelper.queryAll();
         for (Book u : books) {
@@ -131,6 +138,7 @@ public class FindBookActivity extends AppCompatActivity implements AdapterView.O
                     Book borrowbook = new Book(bookId, bookName, bookNumber - 1);
                     Borrow borrow = new Borrow(uid, bookId, bookName);
                     if (mHelper.update(borrowbook) > 0 && nHelper.insert(borrow) > 0)
+                        nHistory.insert(borrow);
                         ToastUtil.show(this, "借书成功");
                     onStart();
                 });

@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import com.xkx.book.activity.borrow.BorrowBookActivity;
 import com.xkx.book.activity.book.FindBookActivity;
 import com.xkx.book.activity.book.ManageBookActivity;
+import com.xkx.book.activity.borrow.BorrowHistoryActivity;
 import com.xkx.book.activity.seat.ReserveSeatActivity;
 import com.xkx.book.activity.user.ManageUserActivity;
 import com.xkx.book.R;
@@ -20,14 +21,20 @@ import com.xkx.book.activity.user.UserUpdateActivity;
 import com.xkx.book.activity.borrow.ViewBorrowActivity;
 import com.xkx.book.database.BookDBHelper;
 import com.xkx.book.database.BorrowDBHelper;
+import com.xkx.book.database.BorrowDBHistory;
 import com.xkx.book.util.ToastUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_user_info, btn_user_serch, btn_user_borrow, btn_admin_info, btn_admin_bookmanage, btn_admin_borrow;
     Button btn_user_seat;
+    Button btn_user_history;    //
+
     private CheckBox ck_admin;
     private BookDBHelper mHelper;
     private BorrowDBHelper nHelper;
+
+    private BorrowDBHistory borrowDBHistory;    //
+
     Intent intent;
     private SharedPreferences sharedPreferences;
 
@@ -48,12 +55,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        //获取数据库帮助器的实例
         mHelper = BookDBHelper.getInstance(this);
         nHelper = BorrowDBHelper.getInstance(this);
+
+        borrowDBHistory = BorrowDBHistory.getInstance(this);
+
         //打开数据库帮助器的读写连接
         mHelper.openWriteLink();
         mHelper.openReadLink();
 
         nHelper.openWriteLink();
         nHelper.openReadLink();
+
+        borrowDBHistory.openWriteLink();
+        borrowDBHistory.openReadLink();
     }
 
     @Override
@@ -80,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             btn_admin_bookmanage.setEnabled(false);
             btn_admin_borrow.setEnabled(false);
 
-
         } else {
             ck_admin.setChecked(true);
             btn_admin_info.setEnabled(true);
@@ -94,6 +106,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_user_info = findViewById(R.id.btn_user_info);
         btn_user_serch = findViewById(R.id.btn_user_serch);
         btn_user_borrow = findViewById(R.id.btn_user_borrow);
+
+        btn_user_history = findViewById(R.id.btn_user_history);
+
         btn_admin_info = findViewById(R.id.btn_admin_info);
         btn_admin_bookmanage = findViewById(R.id.btn_admin_bookmanage);
         btn_admin_borrow = findViewById(R.id.btn_admin_borrow);
@@ -103,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_user_info.setOnClickListener(this);
         btn_user_serch.setOnClickListener(this);
         btn_user_borrow.setOnClickListener(this);
+
+        btn_user_history.setOnClickListener(this);
+
         btn_admin_info.setOnClickListener(this);
         btn_admin_bookmanage.setOnClickListener(this);
         btn_admin_borrow.setOnClickListener(this);
@@ -122,6 +140,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if (view.getId() == R.id.btn_user_borrow) {
             intent.setClass(this, BorrowBookActivity.class);
             startActivity(intent);
+
+        } else if (view.getId() == R.id.btn_user_history) {
+            intent.setClass(this, BorrowHistoryActivity.class);    //todo
+            startActivity(intent);
+
         } else if (view.getId() == R.id.btn_admin_info) {
             intent.setClass(this, ManageUserActivity.class);
             startActivity(intent);
