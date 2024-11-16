@@ -47,9 +47,9 @@ public class BookDBHelper extends SQLiteOpenHelper {
                 ")";
         db.execSQL(sql);
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14923275','中国近现代史纲要',10,'文学与艺术&社会科学','无','2层-206室-123书架-1231')");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14923276','Android移动应用开发',0,'科学与技术','介绍Andorid课程的指导书','1层-205室-123书架-1201')");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14312712','电子技术基础',10,'科学与技术','无','3层-206室-100书架-1031')");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('18964989','C语言项目开发实战入门',5,'科学与技术','无','2层-006室-010书架-0031')");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14923276','Android移动应用开发',0,'科学与技术','介绍Andorid课程的指导书','1层-105室-123书架-1201')");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('14312712','电子技术基础',10,'科学与技术','无','3层-306室-100书架-1031')");
+        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location)Values('18964989','C语言项目开发实战入门',5,'科学与技术','无','2层-206室-010书架-0031')");
     }
 
     //打开数据库的读连接

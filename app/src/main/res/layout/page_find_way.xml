@@ -1,0 +1,46 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/white">
+
+    <!-- 显示完整传入数据 -->
+    <TextView
+        android:id="@+id/tv_full_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="完整位置数据：待添加"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+    android:paddingBottom="16dp"
+    android:layout_marginTop="32dp" />
+
+    <!-- 显示具体页面内容 -->
+    <TextView
+        android:id="@+id/tv_page_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="页面内容：待添加"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+    android:paddingTop="8dp" />
+
+    <!-- 图片区域 -->
+    <ImageView
+        android:id="@+id/iv_direction_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@color/white"
+    android:contentDescription="图片待添加" />
+
+</LinearLayout>

@@ -52,6 +52,9 @@
         <activity
             android:name=".activity.seat.ReserveSeatActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.book.FindWayActivity"
+            android:exported="false" />
         <activity android:name=".activity.seat.ViewReservationActivity"
             android:exported="true">
             <intent-filter>
