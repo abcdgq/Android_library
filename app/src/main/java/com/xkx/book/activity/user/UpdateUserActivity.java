@@ -65,7 +65,7 @@ public class UpdateUserActivity extends AppCompatActivity implements View.OnClic
 
             if (!tempId.isEmpty() && !tempName.isEmpty() && !tempPassword.isEmpty()) {
                 // 声明一个用户信息对象，并填写它的字段值
-                User user = new User(view_user_uid, tempName, Long.parseLong(tempPassword), 0, user_status, 0);
+                User user = new User(view_user_uid, tempName, Long.parseLong(tempPassword), 0, user_status, 0, "", "");
 
                 if (mHelper.update(user) > 0) {
                     ToastUtil.show(this, "修改成功！");

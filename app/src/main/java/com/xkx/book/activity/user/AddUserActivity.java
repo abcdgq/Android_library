@@ -52,7 +52,9 @@ public class AddUserActivity extends AppCompatActivity implements View.OnClickLi
                         Long.parseLong(password),
                         is_book,
                         user_status,
-                        is_deleted);
+                        is_deleted,
+                        "",
+                        "");
 
                 if (mHelper.insert(user) > 0) {
                     ToastUtil.show(this, "注册成功！");

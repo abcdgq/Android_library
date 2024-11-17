@@ -75,7 +75,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent();
 
         if (v.getId() == R.id.btn_login) {
+            System.out.println("mark1");
             list = mHelper.queryById(uid);
+            System.out.println("mark2");
             if(list.isEmpty()){
                 ToastUtil.show(this, "账号不存在");
             } else {
