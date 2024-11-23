@@ -1,5 +1,7 @@
 package com.xkx.book.activity.book;
 
+import static com.xkx.book.openai.openaiMain.func1;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,6 +47,19 @@ public class RecommendBookActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_book);
         textView1 = findViewById(R.id.tv_recommend_id);
+
+
+        // 获取按钮的引用
+        Button myButton = findViewById(R.id.my_button);
+
+        // 设置点击事件监听器
+        myButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 在按钮点击时执行的代码
+                handleOnClick();
+            }
+        });
     }
 
     @Override
@@ -64,9 +79,24 @@ public class RecommendBookActivity extends AppCompatActivity {
 
         userDBHelper.openWriteLink();
         userDBHelper.openReadLink();
+        textView1.setText("默认值");
 //
+        // 这里要想办法获取大模型推荐的返回语句
+        //textView1.setText(s);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //关闭数据库连接
+//        mHelper.closeLink();
+//        nHelper.closeLink();
+    }
+
+
+    public void handleOnClick(){
         books = mHelper.queryAll();
-//
+
         StringBuilder sb = new StringBuilder();
         sb.append("图书馆书库里有的书籍：");
         for (Book u : books) {
@@ -93,18 +123,20 @@ public class RecommendBookActivity extends AppCompatActivity {
         }
 //
 //
-        sb.append("\n请给我推荐我可能喜欢的书籍");
+        String temp = "The book I would like is ";
+        sb.append("\n" + temp);
         String s = sb.toString();//"大模型推荐返回语";
-        // 这里要想办法获取大模型推荐的返回语句
-        textView1.setText(s);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        //关闭数据库连接
-//        mHelper.closeLink();
-//        nHelper.closeLink();
+        func1(s).thenAccept(result -> {
+            // 处理返回的结果
+            int index = result.indexOf(temp) + temp.length();
+            System.out.println("Response: " + result.substring(index).trim());
+            textView1.setText(result.substring(index) + "\n\n");
+        }).exceptionally(ex -> {
+            // 处理异常
+            System.err.println("Error: " + ex.getMessage());
+            textView1.setText("Error: " + ex.getMessage());
+            return null;
+        });
     }
 
 
