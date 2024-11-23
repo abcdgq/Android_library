@@ -5,7 +5,7 @@ public class Book {
     public String bookId; // 图书编号
     public String bookName; // 图书名称
     public int bookNumber; // 图书数量
-    public String bookTags; //文学与艺术&科学与技术&社会科学&历史与人文&生活与健康
+    public String bookTags; //文学与艺术&科学与技术&社会科学&历史与人文&生活与健康(至少一个，多个之间用&连接)
     public String bookIntroduction;//图书简介
     public String bookLocation;//x层（1-3）-xyy室（x对应楼层，yy 01-12）-yyy书架（001-200）-xxxx（0001-9999）
 
@@ -39,9 +39,9 @@ public class Book {
     public String toRecommendString(){
         return "Book{" +
                 //"bookId='" + bookId + '\'' +,实际上我不需要给用户展示书的id
-                " bookName='" + bookName + '\'' +
-                ", bookTags=" + bookTags + '\'' +
-                ", bookIntroduction=" + bookIntroduction +'\'' +
+                " Name='" + bookName + '\'' +
+                ", Tags=" + bookTags + '\'' +
+                ", Introduction=" + bookIntroduction +'\'' +
                 '}';
     }
 

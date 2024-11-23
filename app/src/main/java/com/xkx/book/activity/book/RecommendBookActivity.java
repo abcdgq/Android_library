@@ -20,26 +20,20 @@ import com.xkx.book.adapter.BorrowAdapter;
 import com.xkx.book.database.BookDBHelper;
 import com.xkx.book.database.BorrowDBHelper;
 import com.xkx.book.database.BorrowDBHistory;
+import com.xkx.book.database.UserDBHelper;
 import com.xkx.book.enity.Book;
 import com.xkx.book.enity.Borrow;
+import com.xkx.book.enity.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecommendBookActivity extends AppCompatActivity {
-    private String userId, bookId, bookName;
-    private BorrowDBHistory mHistory;
+
     private BookDBHelper mHelper;
-    private BorrowAdapter borrowAdapter;
     private SharedPreferences sharedPreferences;
-
-    private int bookNumber;
-
-    private String bookTags;
-    private String bookIntroduction;
-    private String bookLocation;
-
     private BorrowDBHistory nHistory;
+    private UserDBHelper userDBHelper;
     List<Book> books = null;
     //当前用户的id
     private String uid;
@@ -59,6 +53,7 @@ public class RecommendBookActivity extends AppCompatActivity {
 //        //获取数据库帮助器的实例
         mHelper = BookDBHelper.getInstance(this);
         nHistory = BorrowDBHistory.getInstance(this);
+        userDBHelper = UserDBHelper.getInstance(this);
 
         //打开数据库帮助器的读写连接
         mHelper.openWriteLink();
@@ -66,6 +61,9 @@ public class RecommendBookActivity extends AppCompatActivity {
 
         nHistory.openWriteLink();
         nHistory.openReadLink();
+
+        userDBHelper.openWriteLink();
+        userDBHelper.openReadLink();
 //
         books = mHelper.queryAll();
 //
@@ -75,12 +73,19 @@ public class RecommendBookActivity extends AppCompatActivity {
             sb.append(u.toRecommendString());
             sb.append("\n");
         }
-//
-        sb.append("\n我的图书借阅历史为：");
-//
+
         sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
         uid = sharedPreferences.getString("uid", "");
+
+        User user = userDBHelper.queryById(uid).get(0);
+        sb.append("\n我的喜好：");
+        sb.append(user.getTag() + " " + user.getPrefer());
+        sb.append("\n我的图书借阅历史为：");
+//
         List<Borrow> borrows = nHistory.queryById(uid);
+        if(borrows.isEmpty()){
+            sb.append("空");
+        }
         for (Borrow borrow : borrows) {
             Book book = mHelper.queryById(borrow.getBorrowBookId()).get(0);
             sb.append(book.toRecommendString());

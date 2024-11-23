@@ -23,8 +23,8 @@ public class User {
         this.is_book = is_book;
         this.user_status = user_status;
         this.is_deleted = is_deleted;
-        this.tag = "";
-        this.prefer = "";
+        this.tag = "空";
+        this.prefer = "空";
     }
 
     public User(String userid, String username, long password, int is_book, int user_status, int is_deleted, String tags, String prefer) {
