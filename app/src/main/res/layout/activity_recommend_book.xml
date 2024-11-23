@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="图书推荐信息"
                 android:textSize="18sp" />  <!-- 这里设置字体大小 -->
 

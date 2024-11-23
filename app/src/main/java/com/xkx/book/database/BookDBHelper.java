@@ -53,7 +53,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
 //        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923280','Java编程思想',5,'科学与技术','系统阐述Java编程','3层-305室-101书架-1201')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923281','Linux内核设计思想',8,'科学与技术','深入理解Linux内核','3层-306室-102书架-1301')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923282','人类简史',10,'文学与艺术&社会科学','对人类历史的深刻反思','1层-103室-104书架-1103')");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923283','小王子',25,'文学与艺术','深邃的儿童文学作品','2层-201室-105书架-1501')");
+//        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923283','小王子',25,'文学与艺术','深邃的儿童文学作品','2层-201室-105书架-1501')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923284','原则',4,'社会科学','成功企业家的思维方式','3层-307室-106书架-1601')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923285','圣经',30,'文学与艺术&社会科学','宗教经典','2层-202室-107书架-1701')");
 //        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923286','围城',11,'文学与艺术','钱钟书的经典之作','1层-104室-108书架-1801')");
@@ -64,7 +64,7 @@ public class BookDBHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923291','习近平谈治国理政',6,'社会科学','关于中国当代政治哲学的书','3层-309室-113书架-2301')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923292','人类群星闪耀时',18,'文学与艺术','历史上的重要时刻','1层-107室-114书架-2401')");
 //        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923293','长恨歌',22,'文学与艺术','白居易的诗作','2层-204室-115书架-2501')");
-        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923294','未来简史',16,'社会科学','对未来的深刻思考','3层-310室-116书架-2601')");
+//        db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923294','未来简史',16,'社会科学','对未来的深刻思考','3层-310室-116书架-2601')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923296','营养之道',12,'生活与健康','关于饮食与营养的指南','1层-108室-118书架-2801')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923297','如何有效管理情绪',10,'生活与健康','帮助读者管理情绪的实用指南','3层-311室-119书架-2901')");
         db.execSQL("insert into " + TABLE_NAME + "(book_id,book_name,book_number,book_tags,book_introduction,book_Location) Values('14923298','正念的奇迹',15,'生活与健康','关于正念的思考与练习','2层-206室-120书架-3001')");
