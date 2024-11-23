@@ -177,6 +177,13 @@
                 android:layout_weight="1"
                 android:text="借阅历史\n(借阅记录)" />
 
+            <Button
+                android:id="@+id/btn_user_recommend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="推荐书籍\n(大模型推荐)" />
+
         </LinearLayout>
 
     </LinearLayout>

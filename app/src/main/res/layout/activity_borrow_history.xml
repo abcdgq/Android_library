@@ -65,7 +65,7 @@
         android:layout_below="@id/tv_view_borrow_welcome"
         android:layout_marginTop="15dp"
         android:padding="8dp"
-        android:text="额外信息行 1"
+        android:text="额外信息行 1\n\n\n\n\n\n"
         android:textSize="18sp"
         android:gravity="center" />
 

@@ -14,6 +14,7 @@ import com.xkx.book.activity.borrow.BorrowBookActivity;
 import com.xkx.book.activity.book.FindBookActivity;
 import com.xkx.book.activity.book.ManageBookActivity;
 import com.xkx.book.activity.borrow.BorrowHistoryActivity;
+import com.xkx.book.activity.book.RecommendBookActivity;
 import com.xkx.book.activity.seat.ReserveSeatActivity;
 import com.xkx.book.activity.seat.ViewReservationActivity;
 import com.xkx.book.activity.user.ManageUserActivity;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btn_user_info, btn_user_serch, btn_user_borrow, btn_admin_info, btn_admin_bookmanage, btn_admin_borrow, btn_admin_reserve;
     Button btn_user_seat;
     Button btn_user_history;    //
+
+    Button btn_user_recommend;
 
     private CheckBox ck_admin;
     private BookDBHelper mHelper;
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_user_borrow = findViewById(R.id.btn_user_borrow);
 
         btn_user_history = findViewById(R.id.btn_user_history);
+        btn_user_recommend = findViewById(R.id.btn_user_recommend);
 
         btn_admin_info = findViewById(R.id.btn_admin_info);
         btn_admin_bookmanage = findViewById(R.id.btn_admin_bookmanage);
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_user_borrow.setOnClickListener(this);
 
         btn_user_history.setOnClickListener(this);
+        btn_user_recommend.setOnClickListener(this);
 
         btn_admin_info.setOnClickListener(this);
         btn_admin_bookmanage.setOnClickListener(this);
@@ -165,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (view.getId() == R.id.btn_admin_reserve) {
             intent = new Intent(this, ViewReservationActivity.class);
+            startActivity(intent);
+        }  else if (view.getId() == R.id.btn_user_recommend) {
+            intent = new Intent(this, RecommendBookActivity.class);
             startActivity(intent);
         } else {
             ToastUtil.show(this,"error");

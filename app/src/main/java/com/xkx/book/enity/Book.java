@@ -36,6 +36,15 @@ public class Book {
                 '}';
     }
 
+    public String toRecommendString(){
+        return "Book{" +
+                //"bookId='" + bookId + '\'' +,实际上我不需要给用户展示书的id
+                " bookName='" + bookName + '\'' +
+                ", bookTags=" + bookTags + '\'' +
+                ", bookIntroduction=" + bookIntroduction +'\'' +
+                '}';
+    }
+
     public String getBookId() {
         return bookId;
     }

@@ -3,6 +3,8 @@ package com.xkx.book.activity.borrow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +29,7 @@ public class BorrowHistoryActivity extends AppCompatActivity implements AdapterV
     private BorrowDBHistory mHistory;
     private BookDBHelper nHelper;
     private BorrowAdapter borrowAdapter;
+    private SharedPreferences sharedPreferences;
 
     private TextView textView1;
 
@@ -52,8 +55,13 @@ public class BorrowHistoryActivity extends AppCompatActivity implements AdapterV
         nHelper.openWriteLink();
         nHelper.openReadLink();
 
-        List<Borrow> borrows = mHistory.queryAll();
+        sharedPreferences = getSharedPreferences("config", Context.MODE_PRIVATE);
+        String uid = sharedPreferences.getString("uid", "");
+
+        List<Borrow> borrows = mHistory.queryById(uid);
         List<Book> books = new ArrayList<>();
+
+
         for (Borrow borrow : borrows) {
             Log.e("ning", borrow.toString());
             Book book = nHelper.queryById(borrow.getBorrowBookId()).get(0);
