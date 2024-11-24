@@ -39,9 +39,9 @@ public class Book {
     public String toRecommendString(){
         return "Book{" +
                 //"bookId='" + bookId + '\'' +,实际上我不需要给用户展示书的id
-                " Name='" + bookName + '\'' +
-                ", Tags=" + bookTags + '\'' +
-                ", Introduction=" + bookIntroduction +'\'' +
+                bookName + ',' +
+                bookTags + ',' +
+                 bookIntroduction +',' +
                 '}';
     }
 
