@@ -48,7 +48,7 @@ public class FindWayAdapter extends RecyclerView.Adapter<FindWayAdapter.FindWayV
                 // 第一个页面的内容和图片
                 holder.tvPageContent.setText(
                         "你要去往的是 " + data.get(0) + "，请前往中间走廊北侧的楼梯或南侧的电梯");
-                holder.ivDirectionImage.setImageResource(R.drawable.img); // 设置 img.png
+                holder.ivDirectionImage.setImageResource(R.drawable.splash); // 设置 img.png
                 break;
             case 1:
                 // 第二个页面的内容和图片，根据层数设置图片
