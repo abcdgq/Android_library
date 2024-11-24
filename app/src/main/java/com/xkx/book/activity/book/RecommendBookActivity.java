@@ -134,7 +134,7 @@ public class RecommendBookActivity extends AppCompatActivity {
         }).exceptionally(ex -> {
             // 处理异常
             System.err.println("Error: " + ex.getMessage());
-            textView1.setText("Error: " + ex.getMessage());
+            textView1.setText("Error: " + "借阅历史太长，超过该大模型限制或网络不佳");
             return null;
         });
     }
